@@ -125,7 +125,7 @@ function LoginPage() {
             Don&apos;t have an account?{" "}
             <div
               href="#"
-              className="text-primary hover:text-success-hover font-medium transition-colors"
+              className="text-primary hover:text-success-hover font-medium transition-colors cursor-pointer"
             >
               Sign up
             </div>
