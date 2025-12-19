@@ -17,6 +17,11 @@ export function Header() {
   const goToProfile = () => {
     navigate("/profile");
   };
+
+  const goToLogin = () => {
+    navigate("/login");
+  };
+
   return (
     <header className="border-b border-border bg-card">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -44,7 +49,7 @@ export function Header() {
               Perfil
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={goToLogin}>
               <LogOut className="mr-2 h-4 w-4 stroke-muted-foreground" />
               <span className="text-destructive">Sair</span>
             </DropdownMenuItem>
