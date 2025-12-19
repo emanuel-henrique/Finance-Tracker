@@ -29,7 +29,7 @@ export function TransactionFilter() {
         }}
       >
         <SelectTrigger className="w-full sm:w-40 bg-card border-border text-white">
-          <SelectValue placeholder="Filtro" />
+          <SelectValue placeholder="Filtrar" />
         </SelectTrigger>
         <SelectContent className="border-border">
           <SelectItem value="Todos">Todos</SelectItem>

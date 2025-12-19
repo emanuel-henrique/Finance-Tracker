@@ -9,7 +9,14 @@ import {
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { LogOut, User, DollarSign } from "lucide-react";
 
+import { useNavigate } from "react-router-dom";
+
 export function Header() {
+  const navigate = useNavigate();
+
+  const goToProfile = () => {
+    navigate("/profile");
+  };
   return (
     <header className="border-b border-border bg-card">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -32,14 +39,14 @@ export function Header() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-48 border-border">
-            <DropdownMenuItem>
-              <User className="mr-2 h-4 w-4" />
-              Profile
+            <DropdownMenuItem onClick={goToProfile}>
+              <User className="mr-2 h-4 w-4 stroke-muted-foreground" />
+              Perfil
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <LogOut className="mr-2 h-4 w-4" />
-              <span className="text-destructive">Logout</span>
+              <LogOut className="mr-2 h-4 w-4 stroke-muted-foreground" />
+              <span className="text-destructive">Sair</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

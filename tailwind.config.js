@@ -36,11 +36,13 @@ export default {
           DEFAULT: "hsl(var(--destructive))",
           opacity: "hsl(var(--destructive-opacity))",
           foreground: "hsl(var(--destructive-foreground))",
+          hover: "hsl(var(--destructive-hover))",
         },
         success: {
           DEFAULT: "hsl(var(--success))",
           opacity: "hsl(var(--success-opacity))",
           foreground: "hsl(var(--success-foreground))",
+          hover: "hsl(var(--success-hover))",
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

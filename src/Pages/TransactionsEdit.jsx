@@ -24,7 +24,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-export function TransactionEdit() {
+function TransactionEdit() {
   const transaction = {
     id: "1",
     title: "Salary",
@@ -241,3 +241,5 @@ export function TransactionEdit() {
     </div>
   );
 }
+
+export default TransactionEdit;

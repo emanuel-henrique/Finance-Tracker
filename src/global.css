@@ -50,9 +50,11 @@
     --destructive: 352, 94%, 38%;
     --destructive-opacity: 352, 94%, 38%, 0.1;
     --destructive-foreground: 0, 0%, 93%;
+    --destructive-hover: 352, 94%, 38%, 0.85;
     --success: 133, 82%, 37%;
     --success-opacity: 133, 82%, 37%, 0.1;
     --success-foreground: 0, 0%, 2%;
+    --success-hover: 133, 82%, 37%, 0.85;
     --border: 0, 0%, 13%;
     --input: 0, 0%, 13%;
     --ring: 133, 82%, 37%;
