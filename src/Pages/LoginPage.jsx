@@ -21,7 +21,7 @@ function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden ">
       <div className="absolute inset-0 bg-background">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-success-opacity via-background to-background" />
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMjIiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMSIvPjwvZz48L2c+PC9zdmc+')] opacity-50" />
@@ -30,7 +30,7 @@ function LoginPage() {
       <Card className="w-full max-w-md relative z-10 border-border shadow-2xl ">
         <CardHeader className="space-y-4 text-center pb-2">
           <div className="flex justify-center">
-            <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-success-opacity border border-primary/20">
+            <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-success-opacity border border-success-opacity">
               <TrendingUp className="w-7 h-7 text-primary" />
             </div>
           </div>
