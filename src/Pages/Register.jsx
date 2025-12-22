@@ -1,8 +1,7 @@
-import { EyeOff, Mail, Lock, TrendingUp } from "lucide-react";
+import { EyeOff, Mail, Lock, TrendingUp, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Card,
   CardContent,
@@ -12,13 +11,42 @@ import {
 } from "@/components/ui/card";
 
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-function LoginPage() {
+import { api } from "@/services/api";
+
+function Login() {
   const navigate = useNavigate();
 
-  const goToHome = () => {
+  const goToLogin = () => {
     navigate("/");
   };
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function handleRegister(e) {
+    e.preventDefault();
+
+    if (!name || !email || !password) {
+      return alert("Preencha todos os campos!");
+    }
+
+    api
+      .post("/users/create", { name, email, password })
+      .then(() => {
+        alert("Usuário cadastrado com sucesso!");
+        goToLogin();
+      })
+      .catch((error) => {
+        if (error.response) {
+          alert(error.response.data.message);
+        } else {
+          alert("Não foi possível cadastrar!");
+        }
+      });
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden ">
@@ -36,16 +64,32 @@ function LoginPage() {
           </div>
           <div className="space-y-1">
             <CardTitle className="text-2xl font-bold tracking-tight">
-              Welcome back
+              Create account
             </CardTitle>
             <CardDescription className="text-muted-foreground">
-              Sign in to your Finance Tracker account
+              Create your first Finance Tracker account
             </CardDescription>
           </div>
         </CardHeader>
 
         <CardContent className="pt-4">
           <form className="space-y-5">
+            <div className="space-y-2">
+              <Label htmlFor="name" className="text-sm font-medium">
+                Name
+              </Label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Input
+                  id="name"
+                  type="name"
+                  placeholder="Enter your name"
+                  onChange={(e) => setName(e.target.value)}
+                  className="pl-10 h-11 bg-secondary/50 border-border "
+                />
+              </div>
+            </div>
+
             <div className="space-y-2">
               <Label htmlFor="email" className="text-sm font-medium">
                 Email
@@ -56,6 +100,7 @@ function LoginPage() {
                   id="email"
                   type="email"
                   placeholder="name@example.com"
+                  onChange={(e) => setEmail(e.target.value)}
                   className="pl-10 h-11 bg-secondary/50 border-border "
                 />
               </div>
@@ -71,6 +116,7 @@ function LoginPage() {
                   id="password"
                   type="password"
                   placeholder="Enter your password"
+                  onChange={(e) => setPassword(e.target.value)}
                   className="pl-10 pr-10 h-11 bg-secondary/50 border-border "
                 />
                 <button
@@ -82,33 +128,12 @@ function LoginPage() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Checkbox
-                  id="remember"
-                  className="border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary"
-                />
-                <Label
-                  htmlFor="remember"
-                  className="text-sm text-muted-foreground cursor-pointer"
-                >
-                  Remember me
-                </Label>
-              </div>
-              <div
-                href="#"
-                className="text-sm text-primary hover:text-success-hover cursor-pointer transition-colors"
-              >
-                Forgot password?
-              </div>
-            </div>
-
             <Button
               type="submit"
               className="w-full h-11 bg-primary hover:bg-success-hover text-primary-foreground font-medium"
-              onClick={goToHome}
+              onClick={handleRegister}
             >
-              Sign in
+              Register
             </Button>
           </form>
 
@@ -122,13 +147,14 @@ function LoginPage() {
           </div>
 
           <p className="text-center text-sm text-muted-foreground">
-            Don&apos;t have an account?{" "}
-            <div
-              href="#"
+            Do you already have an account?{" "}
+            <button
+              type="submit"
+              onClick={goToLogin}
               className="text-primary hover:text-success-hover font-medium transition-colors cursor-pointer"
             >
-              Sign up
-            </div>
+              Login
+            </button>
           </p>
         </CardContent>
       </Card>
@@ -136,4 +162,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default Login;

@@ -8,18 +8,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { LogOut, User, DollarSign } from "lucide-react";
+import { useAuth } from "@/hooks/auth";
 
 import { useNavigate } from "react-router-dom";
 
 export function Header() {
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const goToProfile = () => {
     navigate("/profile");
-  };
-
-  const goToLogin = () => {
-    navigate("/login");
   };
 
   return (
@@ -49,7 +47,7 @@ export function Header() {
               Perfil
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={goToLogin}>
+            <DropdownMenuItem onClick={logout}>
               <LogOut className="mr-2 h-4 w-4 stroke-muted-foreground" />
               <span className="text-destructive">Sair</span>
             </DropdownMenuItem>

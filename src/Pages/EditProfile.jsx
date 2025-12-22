@@ -11,13 +11,32 @@ import {
 } from "@/components/ui/card";
 
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useAuth } from "@/hooks/auth";
 
 function EditProfile() {
+  const { user, updateProfile } = useAuth();
   const navigate = useNavigate();
 
   const goToHome = () => {
     navigate("/");
   };
+
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
+  const [passwordOld, setPasswordOld] = useState("");
+  const [passwordNew, setPasswordNew] = useState("");
+
+  async function handleUpdate(e) {
+    e.preventDefault();
+    const user = {
+      name,
+      email,
+      old_password: passwordOld,
+      password: passwordNew,
+    };
+    await updateProfile({ user });
+  }
 
   return (
     <div className="min-h-screen bg-background p-4 md:p-8">
@@ -63,8 +82,8 @@ function EditProfile() {
                   </button>
                 </div>
                 <div>
-                  <p className="font-medium">name</p>
-                  <p className="text-sm text-muted-foreground">email</p>
+                  <p className="font-medium">{name}</p>
+                  <p className="text-sm text-muted-foreground">{email}</p>
                 </div>
               </div>
 
@@ -78,6 +97,8 @@ function EditProfile() {
                     id="name"
                     type="text"
                     placeholder="Your name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     className="pl-10 h-11 bg-transparent border-border"
                     required
                   />
@@ -94,6 +115,8 @@ function EditProfile() {
                     id="email"
                     type="email"
                     placeholder="name@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="pl-10 h-11 bg-transparent border-border"
                     required
                   />
@@ -113,6 +136,7 @@ function EditProfile() {
                     id="currentPassword"
                     type="password"
                     placeholder="Enter current password to save changes"
+                    onChange={(e) => setPasswordOld(e.target.value)}
                     className="pl-10 pr-10 h-11 bg-transparent border-border"
                     required
                   />
@@ -145,6 +169,7 @@ function EditProfile() {
                     id="newPassword"
                     type="password"
                     placeholder="Enter new password"
+                    onChange={(e) => setPasswordNew(e.target.value)}
                     className="pl-10 pr-10 h-11 bg-transparent border-border"
                   />
                   <button
@@ -162,7 +187,7 @@ function EditProfile() {
             <Button
               type="submit"
               className="flex-1 h-11 bg-primary hover:bg-success-hover text-primary-foreground font-medium"
-              onClick={goToHome}
+              onClick={handleUpdate}
             >
               Save Changes
             </Button>
