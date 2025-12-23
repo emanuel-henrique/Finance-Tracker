@@ -19,7 +19,7 @@ function EditProfile() {
   const navigate = useNavigate();
 
   const goToHome = () => {
-    navigate("/");
+    navigate(-1);
   };
 
   const [name, setName] = useState(user.name);

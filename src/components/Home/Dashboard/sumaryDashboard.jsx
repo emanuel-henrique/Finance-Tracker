@@ -1,6 +1,6 @@
 import { CardSumary } from "@/components/Home/Dashboard/cardSumary";
 
-export function SumaryDashboard() {
+export function SumaryDashboard({ summary }) {
   const formatCurrency = (value) => {
     return new Intl.NumberFormat("pt-BR", {
       style: "currency",
@@ -12,17 +12,17 @@ export function SumaryDashboard() {
       <CardSumary
         title="Balanço Total"
         type="balance"
-        value={formatCurrency(5000)}
+        value={formatCurrency(summary.balance)}
       />
       <CardSumary
         title="Receita Total"
         type="income"
-        value={formatCurrency(15000)}
+        value={formatCurrency(summary.income)}
       />
       <CardSumary
         title="Despesa Total"
         type="expense"
-        value={formatCurrency(10000)}
+        value={formatCurrency(summary.expense)}
       />
     </div>
   );

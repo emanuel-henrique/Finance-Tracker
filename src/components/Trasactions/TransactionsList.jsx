@@ -3,80 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { api } from "@/services/api";
 
-export function TransactionsList() {
+export function TransactionsList({ transactions, loading }) {
   const navigate = useNavigate();
 
   const goToEdit = () => {
     navigate("/details");
   };
-
-  const [transactions, setTransactions] = useState([]);
-
-  // const transaction = [
-  //   {
-  //     id: "1",
-  //     title: "Salary",
-  //     description: "Monthly salary payment",
-  //     amount: 5000,
-  //     type: "Receita",
-  //     date: "2025-12-01",
-  //     createdAt: "2025-12-01T09:00:00Z",
-  //     updatedAt: "2025-12-01T09:00:00Z",
-  //   },
-  //   {
-  //     id: "2",
-  //     title: "Rent",
-  //     description: "Monthly apartment rent",
-  //     amount: 1500,
-  //     type: "expense",
-  //     date: "2025-12-02",
-  //     createdAt: "2025-12-02T10:30:00Z",
-  //     updatedAt: "2025-12-02T10:30:00Z",
-  //   },
-  //   {
-  //     id: "3",
-  //     title: "Freelance Project",
-  //     description: "Website development for client",
-  //     amount: 2000,
-  //     type: "Receita",
-  //     date: "2025-11-28",
-  //     createdAt: "2025-11-28T14:15:00Z",
-  //     updatedAt: "2025-11-29T08:00:00Z",
-  //   },
-  //   {
-  //     id: "4",
-  //     title: "Groceries",
-  //     description: "Weekly grocery shopping",
-  //     amount: 150,
-  //     type: "expense",
-  //     date: "2025-11-27",
-  //     createdAt: "2025-11-27T18:45:00Z",
-  //     updatedAt: "2025-11-27T18:45:00Z",
-  //   },
-  //   {
-  //     id: "5",
-  //     title: "Utilities",
-  //     description: "Electricity and water bills",
-  //     amount: 200,
-  //     type: "expense",
-  //     date: "2025-11-25",
-  //     createdAt: "2025-11-25T11:00:00Z",
-  //     updatedAt: "2025-11-26T09:30:00Z",
-  //   },
-  //   {
-  //     id: "6",
-  //     title: "Investment Returns",
-  //     description: "Dividend from stocks",
-  //     amount: 350,
-  //     type: "Receita",
-  //     date: "2025-11-20",
-  //     createdAt: "2025-11-20T16:00:00Z",
-  //     updatedAt: "2025-11-20T16:00:00Z",
-  //   },
-  // ];
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("pt-BR", {
@@ -93,17 +26,28 @@ export function TransactionsList() {
     });
   };
 
-  useEffect(() => {
-    async function getTransactions() {
-      const response = await api.get("/transactions");
-      setTransactions(response.data);
-      console.log(response.data);
-    }
-    getTransactions();
-  }, []);
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 text-center py-8">
+        <p className="text-muted-foreground">Carregando...</p>
+      </div>
+    );
+  }
+
+  if (!transactions || transactions.length === 0) {
+    return (
+      <div className="container mx-auto px-4 text-center py-8">
+        <p className="text-muted-foreground">Nenhuma transação encontrada</p>
+      </div>
+    );
+  }
+
+  function handleDetails(id) {
+    navigate(`/details/${id}`);
+  }
 
   return (
-    <div className="container mx-auto px-4 space-y-3 pt-4">
+    <div className="container mx-auto px-4 pb-8 space-y-3 pt-4">
       {transactions &&
         transactions.map((transaction) => (
           <div key={transaction.id} className="block">
@@ -166,7 +110,7 @@ export function TransactionsList() {
                       variant="ghost"
                       size="icon"
                       className="h-8 w-8 text-muted-foreground hover:text-foreground ml-2"
-                      onClick={goToEdit}
+                      onClick={() => handleDetails(transaction.id)}
                     >
                       <CircleEllipsis className="!h-6 !w-6" />
                     </Button>
