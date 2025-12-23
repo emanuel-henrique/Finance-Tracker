@@ -15,7 +15,7 @@ import { useState } from "react";
 
 import { api } from "@/services/api";
 
-function Login() {
+function Register() {
   const navigate = useNavigate();
 
   const goToLogin = () => {
@@ -162,4 +162,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;

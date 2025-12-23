@@ -1,4 +1,4 @@
-import { EyeOff, Mail, Lock, TrendingUp } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/auth";
 import { useState } from "react";
 
-function Register() {
+function Login() {
   const navigate = useNavigate();
 
   const goToRegister = () => {
@@ -25,6 +25,7 @@ function Register() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const { login } = useAuth();
 
@@ -84,16 +85,21 @@ function Register() {
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
                   id="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
                   onChange={(e) => setPassword(e.target.value)}
                   className="pl-10 pr-10 h-11 bg-secondary/50 border-border "
                 />
                 <button
                   type="button"
+                  onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <EyeOff className="w-4 h-4" />
+                  {showPassword ? (
+                    <Eye className="w-4 h-4" />
+                  ) : (
+                    <EyeOff className="w-4 h-4" />
+                  )}
                 </button>
               </div>
             </div>
@@ -152,4 +158,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Login;
